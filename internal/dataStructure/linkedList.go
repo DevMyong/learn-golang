@@ -7,27 +7,27 @@ import (
 )
 var stdout = bufio.NewWriter(os.Stdout)
 
-type node struct{
-	next *node
-	prev *node
+type Node struct{
+	next *Node
+	prev *Node
 	val int
 }
-type linkedList struct{
-	root *node
-	tail *node
+type LinkedList struct{
+	root *Node
+	tail *Node
 }
 
-func (l *linkedList) append(val int){
+func (l *LinkedList) Append(val int){
 	if l.root == nil{
-		l.root = &node{val:val}
+		l.root = &Node{val: val}
 		l.tail = l.root
 		return
 	}
-	l.tail.next = &node{prev:l.tail,val:val}
+	l.tail.next = &Node{prev: l.tail,val:val}
 	l.tail = l.tail.next
 }
 
-func (l *linkedList) delete(node *node) {
+func (l *LinkedList) Delete(node *Node) {
 	if node == l.root{
 		l.root = l.root.next
 		l.root.prev = nil
@@ -47,7 +47,7 @@ func (l *linkedList) delete(node *node) {
 	}
 }
 
-func (l *linkedList) print(){
+func (l *LinkedList) Print(){
 	defer stdout.Flush()
 
 	node := l.root
@@ -59,6 +59,6 @@ func (l *linkedList) print(){
 }
 
 //func main(){
-//	list := &linkedList{}
-//	list.append(0)
+//	list := &LinkedList{}
+//	list.Append(0)
 //}
